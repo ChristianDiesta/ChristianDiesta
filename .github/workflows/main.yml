@@ -14,7 +14,7 @@ jobs:
 
       - name: 🦑 Personal metrics
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@master
         with:
           filename: metrics.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -32,7 +32,7 @@ jobs:
 
       - name: 🦑 Personal metrics (anilist)
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@latest
+        uses: lowlighter/metrics@master
         with:
           filename: metrics.personal.anilist.svg
           token: NOT_NEEDED
