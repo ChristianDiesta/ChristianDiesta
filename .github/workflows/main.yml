@@ -24,24 +24,6 @@ jobs:
           plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
           output_action: pull-request
 
-      # Repository template example, with some plugins enabled
-      # Notice how repository name is passed through "query" option
-      - name: 📘 Repository template
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
-        with:
-          template: repository
-          filename: metrics.repository.svg
-          token: ${{ secrets.METRICS_BOT_TOKEN }}
-          user: lowlighter
-          repo: metrics
-          plugin_lines: yes
-          plugin_followup: yes
-          plugin_projects: yes
-          plugin_projects_repositories: lowlighter/metrics/projects/1
-          plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
-          output_action: pull-request
-
 # ======================================================================================
       # 🙋 Introduction
 
@@ -58,36 +40,8 @@ jobs:
           plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
           output_action: pull-request
 
-      # Display introduction (repository)
-      - name: 🙋 Introduction plugin (repository)
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
-        with:
-          filename: metrics.plugin.introduction.repository.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          template: repository
-          repo: metrics
-          base: header
-          plugin_introduction: yes
-          plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
-          output_action: pull-request
-
 # ======================================================================================
       # 🈷️ Most used languages
-
-      # Display most used languages (with some unwanted languages ignored)
-      - name: 🈷️ Languages plugin
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
-        with:
-          filename: metrics.plugin.languages.svg
-          token: ${{ secrets.METRICS_TOKEN }}
-          base: ""
-          plugin_languages: yes
-          plugin_languages_ignored: html, css, tex, less, dockerfile, makefile, qmake, lex, cmake, shell, gnuplot
-          plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
-          output_action: pull-request
-
       # 🈷️ Display most used languages (with some unwanted languages ignored, with details)
       - name: 🈷️ Languages plugin (detailed)
         if: ${{ success() || failure() }}
@@ -102,9 +56,8 @@ jobs:
           plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
           output_action: pull-request
           
-          # ======================================================================================
+# ======================================================================================
       # ✨ Stargazers over last weeks
-
       # Display stargazers evolution over last weeks
       - name: ✨ Stargazers plugin
         if: ${{ success() || failure() }}
