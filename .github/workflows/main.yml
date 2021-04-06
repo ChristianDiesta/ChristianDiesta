@@ -24,21 +24,6 @@ jobs:
           plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
           output_action: pull-request
 
-# ======================================================================================
-      # 🙋 Introduction
-
-      # Display introduction (user)
-      - name: 🙋 Introduction plugin
-        if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
-        with:
-          filename: metrics.plugin.introduction.svg
-          token: ${{ secrets.METRICS_BOT_TOKEN }}
-          user: github
-          base: header
-          plugin_introduction: yes
-          plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
-          output_action: pull-request
 
 # ======================================================================================
       # 🈷️ Most used languages
@@ -57,15 +42,32 @@ jobs:
           output_action: pull-request
           
 # ======================================================================================
-      # ✨ Stargazers over last weeks
-      # Display stargazers evolution over last weeks
-      - name: ✨ Stargazers plugin
+      # 🎟️ Follow-up of issues and pull requests
+
+      # Display ratio of open/closed/merged issues and pull requests
+      - name: 🎟️ Follow-up plugin
         if: ${{ success() || failure() }}
         uses: lowlighter/metrics@master
         with:
-          filename: metrics.plugin.stargazers.svg
+          filename: metrics.plugin.followup.svg
           token: ${{ secrets.METRICS_TOKEN }}
           base: ""
-          plugin_stargazers: yes
+          plugin_followup: yes
           plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
           output_action: pull-request
+          
+          # Display coding habits and recent activity, only charts section (setup timezone for accurate metrics)
+      - name: 💡 Habits plugin (charts)
+        if: ${{ success() || failure() }}
+        uses: lowlighter/metrics@master
+        with:
+          filename: metrics.plugin.habits.charts.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_habits: yes
+          plugin_habits_facts: no
+          plugin_habits_charts: yes
+          plugins_errors_fatal: ${{ github.repository == 'lowlighter/lowlighter' }}
+          config_timezone: Asia/Manila
+          output_action: pull-request
+  
